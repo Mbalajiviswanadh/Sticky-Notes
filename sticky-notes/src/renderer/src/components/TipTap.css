@@ -1,0 +1,123 @@
+/* Style for unordered and ordered lists inside the TipTap editor */
+.ProseMirror {
+  padding: 8px;
+}
+
+.ProseMirror:focus {
+  outline: dashed 1px #96f;
+  border-radius: 10px;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+.ProseMirror ul ul,
+.ProseMirror ol ul {
+  list-style-type: circle;
+}
+
+.ProseMirror ol ol,
+.ProseMirror ul ol {
+  list-style-type: lower-roman;
+}
+
+/* Style for <p> tags to remove excess space */
+.ProseMirror p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Remove bullets for task lists */
+ul[data-type='taskList'] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure label and div are on the same line */
+ul[data-type='taskList'] > li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 5px;
+}
+
+/* Style the label */
+ul[data-type='taskList'] > li > label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  gap: 8px;
+}
+
+/* Hide default checkbox */
+ul[data-type='taskList'] > li > label input {
+  display: none;
+}
+
+/* Custom checkbox styling */
+ul[data-type='taskList'] > li > label span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect for the checkbox */
+ul[data-type='taskList'] > li > label span:hover {
+  border-color: #888;
+  background-color: #f4f4f4;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Checked state */
+ul[data-type='taskList'] > li > label input:checked + span {
+  background-color: green;
+  border-color: lightgreen;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a checkmark using a pseudo-element */
+ul[data-type='taskList'] > li > label input:checked + span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.2s ease;
+  opacity: 1;
+}
+
+/* Unchecked state hides the checkmark */
+ul[data-type='taskList'] > li > label span::after {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+/* Strike through text when checkbox is checked - FIXED SELECTOR */
+ul[data-type='taskList'] > li:has(input:checked) div p {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Optional: Style the div to look clean */
+ul[data-type='taskList'] > li > div {
+  flex-grow: 1;
+}
